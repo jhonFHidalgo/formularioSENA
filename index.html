@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Formulario de Registro</h2>
+        <form id="registrationForm">
+            <div class="form__input">
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="cedula" name="cedula" placeholder="Número de Identificación" required>
+            </div>
+
+            <div class="form__input">
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" placeholder="Fecha de Nacimiento"
+                    required>
+            </div>
+
+            <div class="form__input">
+                <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="ciudadResidencia" name="ciudadResidencia" placeholder="Ciudad de Residencia"
+                    required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="ciudadOrigen" name="ciudadOrigen" placeholder="Ciudad de Origen" required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="artista" name="artista" placeholder="Artista Favorito" required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="cancion1" name="cancion1" placeholder="Canción 1" required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="cancion2" name="cancion2" placeholder="Canción 2" required>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="cancion3" name="cancion3" placeholder="Canción 3" required>
+            </div>
+
+            <button type="button" id="saveButton">Guardar Datos</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const saveButton = document.getElementById('saveButton');
+
+            if (saveButton) {
+                saveButton.addEventListener('click', function () {
+                    const nombre = document.getElementById('nombre').value;
+                    const cedula = document.getElementById('cedula').value;
+                    const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+                    const correo = document.getElementById('correo').value;
+                    const ciudadResidencia = document.getElementById('ciudadResidencia').value;
+                    const ciudadOrigen = document.getElementById('ciudadOrigen').value;
+                    const artista = document.getElementById('artista').value;
+                    const cancion1 = document.getElementById('cancion1').value;
+                    const cancion2 = document.getElementById('cancion2').value;
+                    const cancion3 = document.getElementById('cancion3').value;
+
+                    const newUserData = {
+                        nombre,
+                        cedula,
+                        fechaNacimiento,
+                        correo,
+                        ciudadResidencia,
+                        ciudadOrigen,
+                        artista,
+                        cancion1,
+                        cancion2,
+                        cancion3
+                    };
+
+                    const existingData = JSON.parse(localStorage.getItem('userDataArray')) || [];
+                    existingData.push(newUserData);
+
+                    localStorage.setItem('userDataArray', JSON.stringify(existingData));
+                    window.location.href = 'table.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

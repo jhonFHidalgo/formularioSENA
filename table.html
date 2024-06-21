@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Registrados</title>
+    <link rel="stylesheet" href="css/estilos.css">    
+</head>
+<body>
+    <div class="container">
+        <h2>Datos Registrados</h2>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nombre</th>
+                    <th>Cédula</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Correo Electrónico</th>
+                    <th>Ciudad de Residencia</th>
+                    <th>Ciudad de Origen</th>
+                    <th>Artista Favorito</th>
+                    <th>Canción 1</th>
+                    <th>Canción 2</th>
+                    <th>Canción 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se cargarán aquí -->
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button class="btn__delete" id="clearButton">Borrar Datos</button>
+            <button class="btn__return" id="backButton">Volver</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const clearButton = document.getElementById('clearButton');
+            const backButton = document.getElementById('backButton');
+
+            if (clearButton) {
+                clearButton.addEventListener('click', function () {
+                    localStorage.removeItem('userDataArray');
+                    window.location.reload();
+                });
+            }
+
+            if (backButton) {
+                backButton.addEventListener('click', function () {
+                    window.location.href = 'index.html';
+                });
+            }
+
+            if (window.location.pathname.endsWith('table.html')) {
+                const userDataArray = JSON.parse(localStorage.getItem('userDataArray')) || [];
+
+                if (userDataArray.length > 0) {
+                    const tbody = document.querySelector('#dataTable tbody');
+                    userDataArray.forEach((userData, index) => {
+                        const row = document.createElement('tr');
+
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${userData.nombre}</td>
+                            <td>${userData.cedula}</td>
+                            <td>${userData.fechaNacimiento}</td>
+                            <td>${userData.correo}</td>
+                            <td>${userData.ciudadResidencia}</td>
+                            <td>${userData.ciudadOrigen}</td>
+                            <td>${userData.artista}</td>
+                            <td>${userData.cancion1}</td>
+                            <td>${userData.cancion2}</td>
+                            <td>${userData.cancion3}</td>
+                        `;
+
+                        tbody.appendChild(row);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
